@@ -1,112 +1,114 @@
-import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import Stats from 'three/examples/jsm/libs/stats.module'
-import { GUI } from 'dat.gui'
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import Stats from "three/examples/jsm/libs/stats.module";
+import { GUI } from "dat.gui";
 
-const scene = new THREE.Scene()
-scene.add(new THREE.AxesHelper(5))
+const scene = new THREE.Scene();
+scene.add(new THREE.AxesHelper(5));
 
 const camera = new THREE.PerspectiveCamera(
-    75,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000
-)
-camera.position.z = 3
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
+camera.position.z = 3;
 
-const renderer = new THREE.WebGLRenderer()
-renderer.setSize(window.innerWidth, window.innerHeight)
-document.body.appendChild(renderer.domElement)
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
-new OrbitControls(camera, renderer.domElement)
+new OrbitControls(camera, renderer.domElement);
 
-const boxGeometry = new THREE.BoxGeometry()
-const sphereGeometry = new THREE.SphereGeometry()
-const icosahedronGeometry = new THREE.IcosahedronGeometry(1, 0)
-const planeGeometry = new THREE.PlaneGeometry()
-const torusKnotGeometry = new THREE.TorusKnotGeometry()
+const boxGeometry = new THREE.BoxGeometry();
+const sphereGeometry = new THREE.SphereGeometry();
+const icosahedronGeometry = new THREE.IcosahedronGeometry(1, 0);
+const planeGeometry = new THREE.PlaneGeometry();
+const torusKnotGeometry = new THREE.TorusKnotGeometry();
 
-const material = new THREE.MeshNormalMaterial()
+const material = new THREE.MeshNormalMaterial();
 
-const cube = new THREE.Mesh(boxGeometry, material)
-cube.position.x = 5
-scene.add(cube)
+const cube = new THREE.Mesh(boxGeometry, material);
+cube.position.x = 5;
+scene.add(cube);
 
-const sphere = new THREE.Mesh(sphereGeometry, material)
-sphere.position.x = 3
-scene.add(sphere)
+const sphere = new THREE.Mesh(sphereGeometry, material);
+sphere.position.x = 3;
+scene.add(sphere);
 
-const icosahedron = new THREE.Mesh(icosahedronGeometry, material)
-icosahedron.position.x = 0
-scene.add(icosahedron)
+const icosahedron = new THREE.Mesh(icosahedronGeometry, material);
+icosahedron.position.x = 0;
+scene.add(icosahedron);
 
-const plane = new THREE.Mesh(planeGeometry, material)
-plane.position.x = -2
-scene.add(plane)
+const plane = new THREE.Mesh(planeGeometry, material);
+plane.position.x = -2;
+scene.add(plane);
 
-const torusKnot = new THREE.Mesh(torusKnotGeometry, material)
-torusKnot.position.x = -5
-scene.add(torusKnot)
+const torusKnot = new THREE.Mesh(torusKnotGeometry, material);
+torusKnot.position.x = -5;
+scene.add(torusKnot);
 
-window.addEventListener('resize', onWindowResize, false)
+window.addEventListener("resize", onWindowResize, false);
 function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight
-    camera.updateProjectionMatrix()
-    renderer.setSize(window.innerWidth, window.innerHeight)
-    render()
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  render();
 }
 
-const stats = new Stats()
-document.body.appendChild(stats.dom)
+const stats = new Stats();
+document.body.appendChild(stats.dom);
 
 const options = {
-    side: {
-        FrontSide: THREE.FrontSide,
-        BackSide: THREE.BackSide,
-        DoubleSide: THREE.DoubleSide,
-    },
-}
+  side: {
+    FrontSide: THREE.FrontSide,
+    BackSide: THREE.BackSide,
+    DoubleSide: THREE.DoubleSide,
+  },
+};
 
-const gui = new GUI()
-const materialFolder = gui.addFolder('THREE.Material')
-materialFolder.add(material, 'transparent').onChange(() => material.needsUpdate = true)
-materialFolder.add(material, 'opacity', 0, 1, 0.01)
-materialFolder.add(material, 'depthTest')
-materialFolder.add(material, 'depthWrite')
+const gui = new GUI();
+const materialFolder = gui.addFolder("THREE.Material");
 materialFolder
-    .add(material, 'alphaTest', 0, 1, 0.01)
-    .onChange(() => updateMaterial())
-materialFolder.add(material, 'visible')
+  .add(material, "transparent")
+  .onChange(() => (material.needsUpdate = true));
+materialFolder.add(material, "opacity", 0, 1, 0.01);
+materialFolder.add(material, "depthTest");
+materialFolder.add(material, "depthWrite");
 materialFolder
-    .add(material, 'side', options.side)
-    .onChange(() => updateMaterial())
-materialFolder.open()
+  .add(material, "alphaTest", 0, 1, 0.01)
+  .onChange(() => updateMaterial());
+materialFolder.add(material, "visible");
+materialFolder
+  .add(material, "side", options.side)
+  .onChange(() => updateMaterial());
+materialFolder.open();
 
-const meshNormalMaterialFolder = gui.addFolder('THREE.MeshNormalMaterial')
+const meshNormalMaterialFolder = gui.addFolder("THREE.MeshNormalMaterial");
 
-meshNormalMaterialFolder.add(material, 'wireframe')
+meshNormalMaterialFolder.add(material, "wireframe");
 meshNormalMaterialFolder
-    .add(material, 'flatShading')
-    .onChange(() => updateMaterial())
-meshNormalMaterialFolder.open()
+  .add(material, "flatShading")
+  .onChange(() => updateMaterial());
+meshNormalMaterialFolder.open();
 
-function updateMaterial() {
-    material.side = Number(material.side) as THREE.Side
-    material.needsUpdate = true
-}
+const updateMaterial = () => {
+  material.side = Number(material.side) as THREE.Side;
+  material.needsUpdate = true;
+};
 
-function animate() {
-    requestAnimationFrame(animate)
+const animate = () => {
+  requestAnimationFrame(animate);
 
-    render()
+  render();
 
-    stats.update()
-}
+  stats.update();
+};
 
-function render() {
-    renderer.render(scene, camera)
-}
+const render = () => {
+  renderer.render(scene, camera);
+};
 
-animate()
+animate();
 
 export default animate;
