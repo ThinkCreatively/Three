@@ -3,7 +3,8 @@
 // import LambertMaterialSection from "./sections/lambertMaterial";
 // import PhongMaterialSectoin from "./sections/phongMaterial";
 // import StandardMaterialSection from "./sections/standardMaterial";
-import PhysicalMaterialSection from "./sections/physicalMaterial";
+// import PhysicalMaterialSection from "./sections/physicalMaterial";
+import MatCapMaterial from "./sections/matcapMaterial";
 
 const run = () => {
   // BasicMaterialSection();
@@ -11,7 +12,8 @@ const run = () => {
   // LambertMaterialSection();
   // PhongMaterialSectoin();
   // StandardMaterialSection();
-  PhysicalMaterialSection();
+  // PhysicalMaterialSection();
+  MatCapMaterial();
 };
 
 run();
