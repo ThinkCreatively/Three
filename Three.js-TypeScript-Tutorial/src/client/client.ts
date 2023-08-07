@@ -4,7 +4,8 @@
 // import PhongMaterialSectoin from "./sections/phongMaterial";
 // import StandardMaterialSection from "./sections/standardMaterial";
 // import PhysicalMaterialSection from "./sections/physicalMaterial";
-import MatCapMaterial from "./sections/matcapMaterial";
+// import MatCapMaterialSection from "./sections/matcapMaterial";
+import ToonMaterialSection from "./sections/toonMaterial";
 
 const run = () => {
   // BasicMaterialSection();
@@ -13,7 +14,8 @@ const run = () => {
   // PhongMaterialSectoin();
   // StandardMaterialSection();
   // PhysicalMaterialSection();
-  MatCapMaterial();
+  // MatCapMaterialSection();
+  ToonMaterialSection();
 };
 
 run();
